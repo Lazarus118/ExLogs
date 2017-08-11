@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "148760504320",
+    "firebase_url": "https://exlogs-b2e57.firebaseio.com",
+    "project_id": "exlogs-b2e57",
+    "storage_bucket": "exlogs-b2e57.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:148760504320:android:69b997b1f9cbfed4",
+        "android_client_info": {
+          "package_name": "co.aulatech.exlogs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "148760504320-433m26o0kb7njuhi0dp1c0d17mebqt02.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmo9_NZxWahETVWyAU6jCV_dNkCVOnqTk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
