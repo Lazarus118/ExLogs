@@ -1,6 +1,5 @@
 package co.aulatech.exlogs;
 
-
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,20 +10,15 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.Toast;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
 
-
 public class MainActivity extends AppCompatActivity {
-    DatabaseReference database;
+    // DatabaseReference database;
     Data d;
     static int amount = 50;
     static Long monday, tuesday, wednesday, thursday, friday, saturday, sunday = 0L;
@@ -38,16 +32,16 @@ public class MainActivity extends AppCompatActivity {
         //////////////////////////////////////////////////////////////////////
         d = new Data(monday);
 
-        database = FirebaseDatabase.getInstance().getReference();
-        database.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                monday = (Long) dataSnapshot.child("data").child("Monday").getValue();
-                d.setMonday(monday);
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {}
-        });
+//        database = FirebaseDatabase.getInstance().getReference();
+//        database.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                monday = (Long) dataSnapshot.child("data").child("Monday").getValue();
+//                d.setMonday(monday);
+//            }
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {}
+//        });
         Toast.makeText(getApplicationContext(), "" + d.getMonday(), Toast.LENGTH_SHORT).show();
 
         // SPINNER INIT & LOGIC
@@ -137,21 +131,34 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         //////////////////////////////////////////////////////////////////////
-        GraphView graph = (GraphView) findViewById(R.id.graph);
-        BarGraphSeries<DataPoint> series = new BarGraphSeries<>(new DataPoint[]{
-                new DataPoint(1, 0),
-                new DataPoint(2, 0),
-                new DataPoint(3, 0),
-                new DataPoint(4, 0),
-                new DataPoint(5, 15),
-                new DataPoint(6, 0),
-                new DataPoint(7, 0)
+        SeekBar simpleSeekBar = (SeekBar)findViewById(R.id.seekBar); // initiate the Seek bar
+        simpleSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                GraphView graph = (GraphView) findViewById(R.id.graph);
+                BarGraphSeries<DataPoint> series = new BarGraphSeries<>(new DataPoint[]{
+                        new DataPoint(1, i),
+                        new DataPoint(2, 0),
+                        new DataPoint(3, 0),
+                        new DataPoint(4, 0),
+                        new DataPoint(5, 15),
+                        new DataPoint(6, 0),
+                        new DataPoint(7, 0)
+                });
+                graph.addSeries(series);
+                // draw values on top
+                series.setDrawValuesOnTop(true);
+                series.setValuesOnTopColor(Color.LTGRAY);
+                series.setColor(Color.DKGRAY);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {}
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {}
         });
-        graph.addSeries(series);
-        // draw values on top
-        series.setDrawValuesOnTop(true);
-        series.setValuesOnTopColor(Color.LTGRAY);
-        series.setColor(Color.DKGRAY);
+
         //////////////////////////////////////////////////////////////////////
         Button submit = (Button) findViewById(R.id.button);
         submit.setOnClickListener(new View.OnClickListener() {

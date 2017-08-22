@@ -15,6 +15,11 @@
         android:layout_height="200dip"
         android:id="@+id/graph" />
 
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -39,6 +44,7 @@
             android:layout_height="wrap_content"
             android:gravity="start"
             android:text="+ Sit ups" />
+
     </LinearLayout>
 
     <LinearLayout
